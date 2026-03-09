@@ -4,6 +4,7 @@ import Foundation
 final class GoldPriceViewModel: ObservableObject {
     static let maxHistoryPoints = 1_800
     private static let sourcePreferenceKey = "gold_price_source_preference"
+    private static let minimumHistoryStep: TimeInterval = 0.001
 
     @Published private(set) var quote: GoldQuote?
     @Published private(set) var history: [GoldPricePoint] = []
@@ -209,16 +210,26 @@ final class GoldPriceViewModel: ObservableObject {
     private func apply(_ quote: GoldQuote) {
         self.quote = quote
 
-        let point = GoldPricePoint(timestamp: quote.fetchedAt, pricePerOunce: quote.pricePerOunce)
-
-        if history.last?.timestamp == point.timestamp {
-            history[history.count - 1] = point
-        } else {
-            history.append(point)
-        }
+        // Chart x-values must stay strictly increasing. Upstream timestamps can
+        // repeat or move backward, which makes the line fold onto itself.
+        let point = GoldPricePoint(
+            timestamp: nextHistoryTimestamp(),
+            pricePerOunce: quote.pricePerOunce
+        )
+        history.append(point)
 
         if history.count > Self.maxHistoryPoints {
             history.removeFirst(history.count - Self.maxHistoryPoints)
         }
+    }
+
+    private func nextHistoryTimestamp() -> Date {
+        let now = Date()
+
+        guard let lastTimestamp = history.last?.timestamp, now <= lastTimestamp else {
+            return now
+        }
+
+        return lastTimestamp.addingTimeInterval(Self.minimumHistoryStep)
     }
 }

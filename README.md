@@ -1,94 +1,114 @@
 # GoldPrice for macOS
 
-`GoldPrice` 是一个原生 SwiftUI macOS 菜单栏应用，用来实时查看国际金价，并支持桌面小组件。
+[English](README.md) | [简体中文](README.zh-CN.md)
 
-应用主界面聚焦三个核心目标：
+`GoldPrice` is a native SwiftUI macOS menu bar app for tracking live international gold prices in `USD / OZ` and `RMB / g`, with a desktop widget and a dedicated detail window.
 
-- 在菜单栏里快速看报价
-- 在详情窗口里看更完整的价格信息和短时走势
-- 在桌面小组件里低频查看当前金价
+![Platform](https://img.shields.io/badge/platform-macOS%2014%2B-black)
+![SwiftUI](https://img.shields.io/badge/built%20with-SwiftUI-gold)
+![Widget](https://img.shields.io/badge/widget-supported-8a6a1f)
+
+## Preview
+
+### Dashboard
+
+![Dashboard Preview](docs/assets/preview-dashboard.png)
+
+### Menu Bar Panel
+
+![Menu Bar Preview](docs/assets/preview-menubar.png)
 
 ## Features
 
-- 菜单栏常驻入口，点击后展开价格面板
-- 主应用每秒刷新一次报价
-- 支持 `USD / OZ` 和 `RMB / 克` 两种主显示
-- 支持手动切换数据源：`自动`、`Kitco`、`Gold API`
-- 提供详情窗口，展示最近 4 分钟价格走势
-- 提供 `systemSmall` 和 `systemMedium` 两种 Widget
-- 原生 macOS SwiftUI 实现，无第三方依赖
+- Persistent menu bar entry for quick price lookup
+- Second-level refresh in the main app
+- `USD / OZ` and `RMB / g` primary price display
+- Manual source switching: `Auto`, `Kitco`, `Gold API`
+- Detail window with a short-range price chart
+- `systemSmall` and `systemMedium` desktop widgets
+- Native SwiftUI implementation without third-party dependencies
 
 ## Requirements
 
-- macOS 14 或更高版本
-- Xcode 15 或更高版本
-- 可正常访问外部报价源
+- macOS 14 or later
+- Xcode 15 or later
+- Network access to public price sources
 
 ## Quick Start
 
-1. 用 Xcode 打开 `GoldPrice.xcodeproj`
-2. 选择 `GoldPrice` scheme
-3. 在 `Signing & Capabilities` 中分别为 `GoldPrice` 和 `GoldPriceWidgetExtension` 选择你的 Team
-4. 如果默认 `com.example.*` bundle id 冲突，改成你自己的 bundle id
-5. 运行目标选择 `My Mac`
-6. 按 `Cmd + R` 启动
+1. Open `GoldPrice.xcodeproj` in Xcode.
+2. Select the `GoldPrice` scheme.
+3. In `Signing & Capabilities`, assign a Team for both `GoldPrice` and `GoldPriceWidgetExtension`.
+4. If the default `com.example.*` bundle identifiers conflict, replace them with your own.
+5. Choose `My Mac` as the run destination.
+6. Press `Cmd + R`.
 
-首次运行后，应用主入口在菜单栏。点击菜单栏中的价格即可展开面板，点击 `详情` 可打开主窗口。
+After the first launch, the main entry lives in the macOS menu bar. Click the live price item to open the panel, then use `Detail` to open the full window.
 
 ## Documentation
 
-- [使用手册](docs/USAGE.md)
-- [构建与发布](docs/BUILD_AND_RELEASE.md)
-- [贡献指南](CONTRIBUTING.md)
+- [Usage Guide](docs/USAGE.md)
+- [Build and Release](docs/BUILD_AND_RELEASE.md)
+- [Contributing](CONTRIBUTING.md)
+
+Chinese versions:
+
+- [使用手册](docs/USAGE.zh-CN.md)
+- [构建与发布](docs/BUILD_AND_RELEASE.zh-CN.md)
+- [贡献指南](CONTRIBUTING.zh-CN.md)
 
 ## Data Sources
 
-应用目前支持以下报价源：
+The app currently supports the following modes:
 
-- `自动`：优先使用 `Kitco`，失败时回退到 `Gold API`
-- `Kitco`：直接抓取 Kitco 图表页中的实时数据
-- `Gold API`：使用 `https://api.gold-api.com/price/XAU`
+- `Auto`: prefers `Kitco`, falls back to `Gold API`
+- `Kitco`: parses live data directly from the Kitco chart page
+- `Gold API`: uses `https://api.gold-api.com/price/XAU`
 
-汇率换算使用 Kitco 页面中的 `USD/CNY` 数据。若汇率未成功获取，人民币价格会显示为 `--`。
+`RMB / g` is calculated from `USD/CNY` data parsed alongside the quote source. If exchange-rate parsing fails, the RMB price is shown as `--`.
 
 ## Refresh Policy
 
-- 菜单栏面板和详情窗口：每秒刷新一次
-- Widget：由 `WidgetKit` 控制刷新频率，成功时约 15 分钟后刷新，失败时约 5 分钟后重试
+- Menu bar panel and detail window: refresh every second
+- Widget: refresh frequency is controlled by `WidgetKit`
 
-这意味着“秒级实时”只适用于主应用，不适用于 Widget。
+That means true second-level updates only apply to the main app, not to the widget.
 
 ## Project Structure
 
 ```text
 GoldPriceApp/
-  GoldPriceApp.swift            App 入口
-  MenuBarViews.swift            菜单栏面板
-  ContentView.swift             详情窗口
-  GoldPriceViewModel.swift      刷新与状态管理
+  GoldPriceApp.swift
+  MenuBarViews.swift
+  ContentView.swift
+  GoldPriceViewModel.swift
 
 GoldPriceWidget/
-  GoldPriceWidget.swift         Widget 视图与时间线
+  GoldPriceWidget.swift
 
 Shared/
-  GoldPriceService.swift        数据抓取与源切换
-  GoldPriceModels.swift         模型与数据源定义
-  Formatting.swift              数值格式化
-  GoldPriceTheme.swift          共用主题与像素风组件
+  GoldPriceService.swift
+  GoldPriceModels.swift
+  Formatting.swift
+  GoldPriceTheme.swift
 
 docs/
+  assets/
   USAGE.md
+  USAGE.zh-CN.md
   BUILD_AND_RELEASE.md
+  BUILD_AND_RELEASE.zh-CN.md
 
 scripts/
   generate_app_icon.swift
   generate_icon_concepts.swift
+  generate_readme_previews.swift
   render_menu_header_preview.swift
 ```
 
 ## Local Build
 
-无签名本地构建：
+Unsigned local build:
 
 ```bash
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
@@ -104,15 +124,15 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
 
 ## Known Limitations
 
-- Widget 无法实现每秒刷新
-- 价格源依赖外部网页结构和公开接口，第三方变更可能导致解析失败
-- 当前仓库未附带代码签名与 notarization 配置
-- 当前仓库未指定开源许可证
+- Widgets cannot refresh every second
+- Price parsing depends on third-party page structure and public endpoints
+- The repository does not include signing or notarization automation
+- The repository does not currently include a `LICENSE`
 
 ## Contributing
 
-欢迎提交 Issue 或 Pull Request。开始前建议先阅读 [贡献指南](CONTRIBUTING.md)。
+Issues and pull requests are welcome. Read [Contributing](CONTRIBUTING.md) before making larger changes.
 
 ## License
 
-当前仓库尚未附带 `LICENSE` 文件。若你计划公开发布，请先明确许可证类型。
+No license file is included yet. If you plan to publish the repository publicly, define the license before release.

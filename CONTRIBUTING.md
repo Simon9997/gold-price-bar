@@ -1,63 +1,65 @@
 # Contributing
 
-欢迎为 `GoldPrice` 提交改进。
+[English](CONTRIBUTING.md) | [简体中文](CONTRIBUTING.zh-CN.md)
 
-本项目目前是一个较小的原生 macOS SwiftUI 应用，贡献时请优先保持以下原则：
+Contributions to `GoldPrice` are welcome.
 
-- 保持原生实现，尽量不要引入额外依赖
-- 菜单栏体验优先于大而全的功能堆叠
-- 数据展示要简洁，避免面板过载
-- 文档和代码行为保持一致
+This is a compact native macOS SwiftUI app. Please keep the following principles in mind:
 
-## 开发前准备
+- prefer native implementation and avoid unnecessary dependencies
+- keep the menu bar experience ahead of feature sprawl
+- keep data presentation simple and readable
+- keep documentation aligned with behavior
 
-1. 安装 Xcode 15 或更高版本
-2. 打开 `GoldPrice.xcodeproj`
-3. 配置本地签名 Team
-4. 先跑通一次 `Debug` 构建
+## Before You Start
 
-## 推荐贡献范围
+1. Install Xcode 15 or later.
+2. Open `GoldPrice.xcodeproj`.
+3. Configure a local signing Team.
+4. Make sure a `Debug` build works first.
 
-- 报价源稳定性
-- 解析逻辑健壮性
-- UI 细节打磨
-- Widget 展示优化
-- 文档更新
-- 构建和发布流程优化
+## Good Contribution Areas
 
-## 提交前检查
+- quote source reliability
+- parser robustness
+- UI polish
+- widget presentation
+- documentation updates
+- build and release improvements
 
-请至少完成以下检查：
+## Pre-PR Checklist
 
-- `Debug` 构建成功
-- 主要修改对应的文档也已更新
-- 菜单栏面板没有明显布局回退
-- 若改动涉及数据抓取，至少验证 `自动` 和一个指定源
-- 若改动涉及 Widget，至少确认 extension 可以正常构建
+Please verify at least the following:
 
-## Pull Request 建议
+- `Debug` build succeeds
+- related documentation is updated
+- the menu bar panel has no obvious layout regression
+- if quote fetching changed, validate `Auto` and at least one fixed source
+- if the widget changed, make sure the extension still builds
 
-PR 描述建议包含：
+## Pull Request Notes
 
-- 改动目的
-- 主要改动点
-- 手动验证方式
-- 已知限制或未覆盖内容
+A good PR description should include:
 
-如果改动明显影响 UI，建议附上截图。
+- purpose of the change
+- major implementation points
+- manual verification steps
+- known limits or remaining gaps
 
-## 文档约定
+If the change affects UI, include screenshots when possible.
 
-仓库中的文档默认使用中文，必要时可补充英文术语。
+## Documentation Notes
 
-当你修改以下内容时，请同步更新文档：
+The repository now keeps both English and Simplified Chinese documents. When you change behavior, update both sides if the change affects users or contributors.
 
-- 数据源行为
-- 刷新策略
-- Widget 限制
-- 安装与打包方式
-- 对外分发流程
+Sync docs when you change:
+
+- source behavior
+- refresh policy
+- widget limitations
+- install or packaging flow
+- distribution steps
 
 ## License
 
-当前仓库尚未指定许可证。提交前请知悉，后续公开发布前需要由仓库维护者补充正式 `LICENSE`。
+No license has been selected yet. Keep that in mind before contributing code intended for public release.

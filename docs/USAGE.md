@@ -1,146 +1,148 @@
-# 使用手册
+# Usage Guide
 
-本文档面向最终使用者，说明如何运行 `GoldPrice`、如何切换数据源，以及如何添加桌面小组件。
+[English](USAGE.md) | [简体中文](USAGE.zh-CN.md)
 
-## 1. 启动应用
+This guide is for end users. It explains how to run `GoldPrice`, switch quote sources, and add the desktop widget.
 
-### 使用 Xcode 运行
+## 1. Launch the App
 
-1. 打开 `GoldPrice.xcodeproj`
-2. 选择 `GoldPrice` scheme
-3. 为 `GoldPrice` 和 `GoldPriceWidgetExtension` 设置签名 Team
-4. 运行到 `My Mac`
+### Run with Xcode
 
-### 使用现成的 `.dmg`
+1. Open `GoldPrice.xcodeproj`.
+2. Select the `GoldPrice` scheme.
+3. Assign a signing Team for `GoldPrice` and `GoldPriceWidgetExtension`.
+4. Run on `My Mac`.
 
-1. 双击挂载 `GoldPrice.dmg`
-2. 将 `GoldPrice.app` 拖入 `Applications`
-3. 首次打开时，如果 macOS 提示来源不明，请在“系统设置 > 隐私与安全性”里放行
+### Run from a `.dmg`
 
-## 2. 菜单栏面板
+1. Double-click `GoldPrice.dmg`.
+2. Drag `GoldPrice.app` into `Applications`.
+3. If macOS blocks the first launch, allow it in `System Settings > Privacy & Security`.
 
-应用启动后，主入口位于菜单栏。
+## 2. Menu Bar Panel
 
-点击菜单栏中的价格，会展开面板。面板中通常包含：
+After launch, the main entry lives in the menu bar.
 
-- 当前美元价格 `USD / OZ`
-- 当前人民币克价 `RMB / 克`
-- 更新时间
-- 当前会话涨跌
-- 数据源切换按钮
-- `详情`、`刷新`、`退出` 操作按钮
+Clicking the live price item opens the panel. The panel typically shows:
 
-## 3. 数据源切换
+- current `USD / OZ`
+- current `RMB / g`
+- last update time
+- current session move
+- source switcher buttons
+- `Detail`, `Refresh`, and `Quit` actions
 
-菜单栏面板支持三种数据源模式：
+## 3. Source Switching
 
-- `自动`
-  - 默认模式
-  - 优先使用 `Kitco`
-  - `Kitco` 失败时自动回退到 `Gold API`
+The menu bar panel supports three modes:
+
+- `Auto`
+  - default mode
+  - prefers `Kitco`
+  - automatically falls back to `Gold API`
 - `Kitco`
-  - 强制只使用 Kitco
-  - 如果 Kitco 页面结构变化或网络不可达，会直接报错
+  - forces Kitco only
+  - fails directly if the Kitco page changes or becomes unreachable
 - `Gold API`
-  - 强制只使用 `api.gold-api.com`
+  - forces `api.gold-api.com`
 
-切换数据源后：
+After switching source:
 
-- 当前历史图会清空并重新采样
-- 应用会立即发起一次新请求
-- 你在这次运行中的选择会被记住
+- the current history buffer is cleared and sampled again
+- the app immediately sends a new request
+- your selection is kept for the current run
 
-## 4. 价格说明
+## 4. Price Notes
 
-应用主要显示两个价格：
+The app focuses on two prices:
 
 - `USD / OZ`
-  - 每金衡盎司黄金的美元报价
-- `RMB / 克`
-  - 基于 `USD/CNY` 汇率换算得到的人民币克价
+  - US dollar quote per troy ounce
+- `RMB / g`
+  - converted Chinese yuan price per gram
 
-如果人民币价格显示为 `--`，通常说明本次请求没有成功拿到 `USD/CNY` 汇率数据。
+If the RMB price shows `--`, the current request did not provide a valid `USD/CNY` rate.
 
-## 5. 详情窗口
+## 5. Detail Window
 
-点击菜单栏面板中的 `详情` 按钮，会打开详情窗口。
+Click `Detail` in the menu bar panel to open the main window.
 
-详情窗口提供：
+The detail window provides:
 
-- 更大的当前报价展示
-- 最近 4 分钟的价格走势
-- 当前会话涨跌信息
-- 当前数据源和最近更新时间
+- a larger primary quote display
+- a short-range price chart
+- current session movement
+- current source and last update time
 
-主应用刷新频率为每秒一次，因此详情窗口会比 Widget 更接近实时。
+The main app refreshes once per second, so the detail window is more real-time than the widget.
 
-## 6. 添加桌面小组件
+## 6. Add the Desktop Widget
 
-先确保主应用至少成功运行过一次，然后再添加 Widget。
+Make sure the main app has launched successfully at least once before adding the widget.
 
-### 方法 A：桌面右键
+### Method A: Desktop Context Menu
 
-1. 在 macOS 桌面空白处右键
-2. 选择“编辑小组件”
-3. 搜索“国际金价”或 `GoldPrice`
-4. 选择 `small` 或 `medium`
-5. 点击添加
+1. Right-click an empty area on the macOS desktop.
+2. Choose `Edit Widgets`.
+3. Search for `GoldPrice` or `国际金价`.
+4. Choose `small` or `medium`.
+5. Add it.
 
-### 方法 B：通知中心
+### Method B: Notification Center
 
-1. 打开通知中心
-2. 滚动到底部
-3. 点击“编辑小组件”
-4. 搜索并添加 `GoldPrice`
+1. Open Notification Center.
+2. Scroll to the bottom.
+3. Click `Edit Widgets`.
+4. Search for and add `GoldPrice`.
 
-## 7. Widget 刷新说明
+## 7. Widget Refresh
 
-Widget 不是秒级刷新。
+Widgets are not second-level real-time.
 
-当前策略：
+Current behavior:
 
-- 正常情况下，大约 15 分钟后刷新一次
-- 请求失败时，大约 5 分钟后重试
+- normally refreshes again in about 15 minutes
+- retries in about 5 minutes after a failed request
 
-这是 `WidgetKit` 的正常限制，不是应用 bug。
+That is a normal `WidgetKit` limitation, not an app bug.
 
-## 8. 常见问题
+## 8. FAQ
 
-### Q: 为什么 `Kitco` 模式下会报错？
+### Q: Why does `Kitco` mode fail?
 
-可能原因：
+Possible reasons:
 
-- Kitco 页面结构变化
-- 网络访问异常
-- 临时超时
+- Kitco changed the page structure
+- network access failed
+- a temporary timeout happened
 
-建议先切回 `自动` 模式，或者直接切到 `Gold API`。
+Try switching back to `Auto` or directly to `Gold API`.
 
-### Q: 为什么我看不到 Widget？
+### Q: Why can't I see the widget?
 
-请检查：
+Check the following:
 
-- 主应用是否至少成功运行过一次
-- `GoldPriceWidgetExtension` 是否签名成功
-- 两个 target 的 Team 是否一致
-- bundle id 是否冲突
+- the main app has been launched at least once
+- `GoldPriceWidgetExtension` is signed successfully
+- both targets use the same Team
+- the bundle identifiers do not conflict
 
-### Q: 为什么价格没有刷新？
+### Q: Why isn't the price updating?
 
-请检查：
+Check the following:
 
-- 网络是否正常
-- 当前数据源是否可用
-- 是否正在频繁切换数据源
+- your network connection
+- whether the current source is reachable
+- whether you are switching sources too frequently
 
-你也可以点击菜单栏面板中的 `刷新` 手动拉取一次。
+You can also click `Refresh` in the menu bar panel to fetch immediately.
 
-### Q: 为什么应用不能直接发给别人用？
+### Q: Why can't I just send this app to someone else?
 
-因为无签名构建通常只适合本机自用。若要给别人安装，需要额外做：
+Unsigned local builds are usually only suitable for your own Mac. To distribute it, you still need:
 
-- Developer ID 签名
-- notarization 公证
-- stapler 回填
+- Developer ID signing
+- notarization
+- stapling
 
-具体步骤见 [构建与发布](BUILD_AND_RELEASE.md)。
+See [Build and Release](BUILD_AND_RELEASE.md) for details.

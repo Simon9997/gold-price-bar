@@ -1,16 +1,18 @@
-# 构建与发布
+# Build and Release
 
-本文档面向开发者，说明如何本地构建、如何生成 `.dmg`，以及如何为他人分发做签名与公证。
+[English](BUILD_AND_RELEASE.md) | [简体中文](BUILD_AND_RELEASE.zh-CN.md)
 
-## 1. 环境要求
+This guide is for developers. It covers local builds, `.dmg` packaging, and the extra steps needed for distribution.
+
+## 1. Requirements
 
 - macOS
 - Xcode 15+
-- 命令行工具可用：`xcodebuild`、`hdiutil`
+- command line tools available: `xcodebuild`, `hdiutil`
 
-## 2. Debug 构建
+## 2. Debug Build
 
-适合本地调试：
+For local development:
 
 ```bash
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
@@ -24,15 +26,15 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
   build
 ```
 
-产物路径通常为：
+Typical output:
 
 ```text
 .build/DerivedData/Build/Products/Debug/GoldPrice.app
 ```
 
-## 3. Release 构建
+## 3. Release Build
 
-适合打包：
+For packaging:
 
 ```bash
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
@@ -46,15 +48,15 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
   build
 ```
 
-产物路径通常为：
+Typical output:
 
 ```text
 .build/DerivedData/Build/Products/Release/GoldPrice.app
 ```
 
-## 4. 生成 `.dmg`
+## 4. Build a `.dmg`
 
-本地自用的最简打包方式：
+Minimal local packaging flow:
 
 ```bash
 mkdir -p ./.build/dmg-root
@@ -69,23 +71,23 @@ hdiutil create \
   ./GoldPrice.dmg
 ```
 
-生成后的安装包在：
+Output:
 
 ```text
 ./GoldPrice.dmg
 ```
 
-## 5. 发给别人安装
+## 5. Distribute to Other Users
 
-若你打算把应用发给其他 macOS 用户，仅有 `.dmg` 还不够。
+If you plan to send the app to other macOS users, a plain `.dmg` is not enough.
 
-建议流程：
+Recommended flow:
 
-1. 使用 `Developer ID Application` 对 `GoldPrice.app` 签名
-2. 使用 `notarytool` 提交 notarization
-3. 使用 `stapler` 将公证结果回填到 `app` 或 `dmg`
+1. Sign `GoldPrice.app` with `Developer ID Application`
+2. Submit with `notarytool`
+3. Staple the notarization result back to the `app` or `dmg`
 
-典型命令链：
+Typical command chain:
 
 ```bash
 xcodebuild archive ...
@@ -95,34 +97,34 @@ xcrun notarytool submit ...
 xcrun stapler staple ...
 ```
 
-## 6. 常见发布问题
+## 6. Common Release Issues
 
-### Widget 不显示
+### Widget does not appear
 
-请检查：
+Check:
 
-- 主 app 和 widget extension 的签名 Team 是否一致
-- bundle id 是否冲突
-- 主 app 是否先成功运行过一次
+- the main app and widget extension use the same Team
+- the bundle identifiers do not conflict
+- the main app has launched successfully at least once
 
-### Gatekeeper 拦截
+### Gatekeeper blocks launch
 
-说明你当前发出去的是无签名或未公证版本。对外分发前请补齐签名和 notarization。
+This usually means the build is unsigned or not notarized. Complete signing and notarization before public distribution.
 
-### 数据源失效
+### Data source breaks
 
-应用依赖第三方报价源。若 `Kitco` 页面结构变化，可能需要调整解析逻辑，优先检查：
+The app depends on third-party quote sources. If `Kitco` changes page structure, inspect:
 
 - `Shared/GoldPriceService.swift`
 - `Shared/GoldPriceModels.swift`
 
-## 7. 建议的发布检查清单
+## 7. Suggested Release Checklist
 
-- `Release` 构建通过
-- 菜单栏面板可正常打开
-- 详情窗口可正常显示
-- `自动`、`Kitco`、`Gold API` 三种模式都验证过
-- `RMB / 克` 正常显示
-- Widget 能被系统识别
-- 安装包可正常挂载
-- 若对外分发，签名和 notarization 已完成
+- `Release` build succeeds
+- menu bar panel opens correctly
+- detail window shows correctly
+- `Auto`, `Kitco`, and `Gold API` modes were all checked
+- `RMB / g` displays correctly
+- widget is recognized by the system
+- the installer mounts correctly
+- signing and notarization are complete if you are distributing publicly
