@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000000000000000000201 /* GoldPriceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000101 /* GoldPriceApp.swift */; };
+		A10000000000000000000202 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000102 /* ContentView.swift */; };
+		A10000000000000000000203 /* GoldPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000103 /* GoldPriceViewModel.swift */; };
+		A10000000000000000000204 /* GoldPriceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000111 /* GoldPriceModels.swift */; };
+		A10000000000000000000205 /* GoldPriceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000112 /* GoldPriceService.swift */; };
+		A10000000000000000000206 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000113 /* Formatting.swift */; };
+		A10000000000000000000207 /* GoldPriceWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A10000000000000000000132 /* GoldPriceWidgetExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A10000000000000000000208 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000105 /* Assets.xcassets */; };
+		A10000000000000000000209 /* GoldPriceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000114 /* GoldPriceTheme.swift */; };
+		A10000000000000000000210 /* DashboardWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000106 /* DashboardWindowController.swift */; };
+		A10000000000000000000211 /* GoldPriceWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000121 /* GoldPriceWidgetBundle.swift */; };
+		A10000000000000000000212 /* GoldPriceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000122 /* GoldPriceWidget.swift */; };
+		A10000000000000000000213 /* GoldPriceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000111 /* GoldPriceModels.swift */; };
+		A10000000000000000000214 /* GoldPriceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000112 /* GoldPriceService.swift */; };
+		A10000000000000000000215 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000113 /* Formatting.swift */; };
+		A10000000000000000000216 /* MenuBarViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000107 /* MenuBarViews.swift */; };
+		A10000000000000000000217 /* GoldPriceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000114 /* GoldPriceTheme.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A10000000000000000000501 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A10000000000000000000402;
+			remoteInfo = GoldPriceWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A10000000000000000000304 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A10000000000000000000207 /* GoldPriceWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000101 /* GoldPriceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPriceApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000102 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A10000000000000000000103 /* GoldPriceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPriceViewModel.swift; sourceTree = "<group>"; };
+		A10000000000000000000104 /* GoldPriceApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoldPriceApp.entitlements; sourceTree = "<group>"; };
+		A10000000000000000000105 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000000000000000000106 /* DashboardWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardWindowController.swift; sourceTree = "<group>"; };
+		A10000000000000000000107 /* MenuBarViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarViews.swift; sourceTree = "<group>"; };
+		A10000000000000000000111 /* GoldPriceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPriceModels.swift; sourceTree = "<group>"; };
+		A10000000000000000000112 /* GoldPriceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPriceService.swift; sourceTree = "<group>"; };
+		A10000000000000000000113 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+		A10000000000000000000114 /* GoldPriceTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPriceTheme.swift; sourceTree = "<group>"; };
+		A10000000000000000000121 /* GoldPriceWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPriceWidgetBundle.swift; sourceTree = "<group>"; };
+		A10000000000000000000122 /* GoldPriceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoldPriceWidget.swift; sourceTree = "<group>"; };
+		A10000000000000000000123 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000124 /* GoldPriceWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoldPriceWidget.entitlements; sourceTree = "<group>"; };
+		A10000000000000000000131 /* GoldPrice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoldPrice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000132 /* GoldPriceWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GoldPriceWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10000000000000000000302 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000004 /* GoldPriceApp */,
+				A10000000000000000000005 /* GoldPriceWidget */,
+				A10000000000000000000006 /* Shared */,
+				A10000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A10000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000131 /* GoldPrice.app */,
+				A10000000000000000000132 /* GoldPriceWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000004 /* GoldPriceApp */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000101 /* GoldPriceApp.swift */,
+				A10000000000000000000102 /* ContentView.swift */,
+				A10000000000000000000103 /* GoldPriceViewModel.swift */,
+				A10000000000000000000106 /* DashboardWindowController.swift */,
+				A10000000000000000000107 /* MenuBarViews.swift */,
+				A10000000000000000000105 /* Assets.xcassets */,
+				A10000000000000000000104 /* GoldPriceApp.entitlements */,
+			);
+			path = GoldPriceApp;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000005 /* GoldPriceWidget */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000121 /* GoldPriceWidgetBundle.swift */,
+				A10000000000000000000122 /* GoldPriceWidget.swift */,
+				A10000000000000000000123 /* Info.plist */,
+				A10000000000000000000124 /* GoldPriceWidget.entitlements */,
+			);
+			path = GoldPriceWidget;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000006 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000111 /* GoldPriceModels.swift */,
+				A10000000000000000000112 /* GoldPriceService.swift */,
+				A10000000000000000000113 /* Formatting.swift */,
+				A10000000000000000000114 /* GoldPriceTheme.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000000000000000000401 /* GoldPrice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000602 /* Build configuration list for PBXNativeTarget "GoldPrice" */;
+			buildPhases = (
+				A10000000000000000000301 /* Sources */,
+				A10000000000000000000302 /* Frameworks */,
+				A10000000000000000000303 /* Resources */,
+				A10000000000000000000304 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A10000000000000000000502 /* PBXTargetDependency */,
+			);
+			name = GoldPrice;
+			productName = GoldPrice;
+			productReference = A10000000000000000000131 /* GoldPrice.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A10000000000000000000402 /* GoldPriceWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000603 /* Build configuration list for PBXNativeTarget "GoldPriceWidgetExtension" */;
+			buildPhases = (
+				A10000000000000000000311 /* Sources */,
+				A10000000000000000000312 /* Frameworks */,
+				A10000000000000000000313 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoldPriceWidgetExtension;
+			productName = GoldPriceWidgetExtension;
+			productReference = A10000000000000000000132 /* GoldPriceWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A10000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					A10000000000000000000401 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					A10000000000000000000402 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+				};
+			};
+			buildConfigurationList = A10000000000000000000601 /* Build configuration list for PBXProject "GoldPrice" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A10000000000000000000002;
+			productRefGroup = A10000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A10000000000000000000401 /* GoldPrice */,
+				A10000000000000000000402 /* GoldPriceWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10000000000000000000303 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000208 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000313 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10000000000000000000301 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000201 /* GoldPriceApp.swift in Sources */,
+				A10000000000000000000202 /* ContentView.swift in Sources */,
+				A10000000000000000000203 /* GoldPriceViewModel.swift in Sources */,
+				A10000000000000000000204 /* GoldPriceModels.swift in Sources */,
+				A10000000000000000000205 /* GoldPriceService.swift in Sources */,
+				A10000000000000000000206 /* Formatting.swift in Sources */,
+				A10000000000000000000209 /* GoldPriceTheme.swift in Sources */,
+				A10000000000000000000210 /* DashboardWindowController.swift in Sources */,
+				A10000000000000000000216 /* MenuBarViews.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A10000000000000000000311 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000211 /* GoldPriceWidgetBundle.swift in Sources */,
+				A10000000000000000000212 /* GoldPriceWidget.swift in Sources */,
+				A10000000000000000000213 /* GoldPriceModels.swift in Sources */,
+				A10000000000000000000214 /* GoldPriceService.swift in Sources */,
+				A10000000000000000000215 /* Formatting.swift in Sources */,
+				A10000000000000000000217 /* GoldPriceTheme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A10000000000000000000502 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000402 /* GoldPriceWidgetExtension */;
+			targetProxy = A10000000000000000000501 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A10000000000000000000610 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A10000000000000000000611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A10000000000000000000620 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoldPriceApp/GoldPriceApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 63Z2R9XN6L;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Gold Price";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_LSUIElement = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../PlugIns",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GoldPrice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A10000000000000000000621 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoldPriceApp/GoldPriceApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 63Z2R9XN6L;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Gold Price";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
+				INFOPLIST_KEY_LSUIElement = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../PlugIns",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GoldPrice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A10000000000000000000630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = GoldPriceWidget/GoldPriceWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 63Z2R9XN6L;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GoldPriceWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GoldPrice.GoldPriceWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A10000000000000000000631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = GoldPriceWidget/GoldPriceWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 63Z2R9XN6L;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GoldPriceWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GoldPrice.GoldPriceWidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10000000000000000000601 /* Build configuration list for PBXProject "GoldPrice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000610 /* Debug */,
+				A10000000000000000000611 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10000000000000000000602 /* Build configuration list for PBXNativeTarget "GoldPrice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000620 /* Debug */,
+				A10000000000000000000621 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A10000000000000000000603 /* Build configuration list for PBXNativeTarget "GoldPriceWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A10000000000000000000630 /* Debug */,
+				A10000000000000000000631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A10000000000000000000001 /* Project object */;
+}
