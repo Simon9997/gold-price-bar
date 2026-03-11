@@ -108,7 +108,9 @@ struct ContentView: View {
 
                     HStack(spacing: 8) {
                         infoTag("SOURCE", viewModel.sourceName)
-                        infoTag("UPDATE", viewModel.latestUpdatedText)
+                        if let latestUpdatedText = viewModel.latestUpdatedText {
+                            infoTag("UPDATE", latestUpdatedText)
+                        }
                         infoTag("MOVE", viewModel.sessionMove ?? "--")
                     }
                 }

@@ -68,7 +68,9 @@ struct MenuBarPanelView: View {
             }
 
             HStack(spacing: 8) {
-                infoChip("UPD \(viewModel.latestUpdatedText)")
+                if let latestUpdatedText = viewModel.latestUpdatedText {
+                    infoChip("UPD \(latestUpdatedText)")
+                }
                 infoChip(viewModel.sessionMove ?? "--")
             }
 

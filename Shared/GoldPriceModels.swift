@@ -23,7 +23,8 @@ enum GoldPriceSourcePreference: String, CaseIterable, Identifiable, Codable {
 
 struct GoldQuote: Equatable {
     let pricePerOunce: Double
-    let fetchedAt: Date
+    let fetchedAt: Date?
+    let sourceUpdatedAt: Date?
     let sourceName: String
     let bidPerOunce: Double?
     let askPerOunce: Double?
@@ -52,6 +53,7 @@ struct GoldQuote: Equatable {
     static let preview = GoldQuote(
         pricePerOunce: 5_018.40,
         fetchedAt: .now.addingTimeInterval(-42),
+        sourceUpdatedAt: .now.addingTimeInterval(-43),
         sourceName: "Preview",
         bidPerOunce: 5_017.8,
         askPerOunce: 5_019.0,
@@ -72,7 +74,7 @@ struct GoldAPIResponse: Decodable {
     let name: String
     let price: Double
     let symbol: String
-    let updatedAt: Date
+    let updatedAt: Date?
     let updatedAtReadable: String?
 }
 
@@ -119,7 +121,7 @@ struct KitcoPagePayload: Decodable {
         let ask: Double
         let bid: Double
         let mid: Double
-        let timestamp: TimeInterval
+        let timestamp: TimeInterval?
     }
 
     struct CurrencyQuote: Decodable {

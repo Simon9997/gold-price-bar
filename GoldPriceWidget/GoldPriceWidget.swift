@@ -43,7 +43,7 @@ struct GoldPriceTimelineProvider: TimelineProvider {
     private func fetchEntry() async -> GoldPriceEntry {
         do {
             let quote = try await service.fetchQuote()
-            return GoldPriceEntry(date: quote.fetchedAt, quote: quote, errorMessage: nil)
+            return GoldPriceEntry(date: quote.fetchedAt ?? .now, quote: quote, errorMessage: nil)
         } catch {
             return GoldPriceEntry(date: .now, quote: nil, errorMessage: error.localizedDescription)
         }
@@ -91,7 +91,9 @@ private struct GoldPriceWidgetView: View {
 
                     Spacer(minLength: 0)
 
-                    footer("UPD \(GoldPriceFormatting.shortTime(quote.fetchedAt))")
+                    if let fetchedAt = quote.fetchedAt {
+                        footer("UPD \(GoldPriceFormatting.shortTime(fetchedAt))")
+                    }
                 } else {
                     failureState
                 }
@@ -111,7 +113,9 @@ private struct GoldPriceWidgetView: View {
                     }
 
                     HStack(spacing: 8) {
-                        footer("UPD \(GoldPriceFormatting.shortTime(quote.fetchedAt))")
+                        if let fetchedAt = quote.fetchedAt {
+                            footer("UPD \(GoldPriceFormatting.shortTime(fetchedAt))")
+                        }
                         footer(quote.sourceName)
                     }
                 } else {

@@ -23,7 +23,6 @@ enum GoldPriceServiceError: LocalizedError {
 struct GoldPriceService {
     private static let goldAPIEndpoint = URL(string: "https://api.gold-api.com/price/XAU")!
     private static let kitcoGoldPage = URL(string: "https://www.kitco.com/charts/gold?sitetype=fullsite")!
-    private static let kitcoCacheWindow: TimeInterval = 3
     private static let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -62,6 +61,7 @@ struct GoldPriceService {
 
     private func fetchFromKitco() async throws -> GoldQuote {
         let payload = try await fetchKitcoPayload()
+        let fetchedAt = Date()
         let usdToCNYRate = extractUSDtoCNYRate(from: payload)
 
         for query in payload.props.pageProps.dehydratedState.queries {
@@ -79,7 +79,8 @@ struct GoldPriceService {
 
             return GoldQuote(
                 pricePerOunce: result.mid,
-                fetchedAt: Date(timeIntervalSince1970: result.timestamp),
+                fetchedAt: fetchedAt,
+                sourceUpdatedAt: result.timestamp.map(Date.init(timeIntervalSince1970:)),
                 sourceName: "Kitco",
                 bidPerOunce: result.bid,
                 askPerOunce: result.ask,
@@ -91,6 +92,8 @@ struct GoldPriceService {
     }
 
     private func fetchFromGoldAPI() async throws -> GoldQuote {
+        async let usdToCNYRate = fetchUSDtoCNYRateSafely()
+
         var request = URLRequest(url: Self.goldAPIEndpoint)
         request.timeoutInterval = 12
         request.cachePolicy = .reloadIgnoringLocalCacheData
@@ -113,16 +116,16 @@ struct GoldPriceService {
         guard payload.price.isFinite, payload.price > 0 else {
             throw GoldPriceServiceError.invalidPayload
         }
-
-        let usdToCNYRate = try? await fetchUSDtoCNYRateFromKitco()
+        let fetchedAt = Date()
 
         return GoldQuote(
             pricePerOunce: payload.price,
-            fetchedAt: payload.updatedAt,
+            fetchedAt: fetchedAt,
+            sourceUpdatedAt: payload.updatedAt,
             sourceName: "gold-api.com",
             bidPerOunce: nil,
             askPerOunce: nil,
-            usdToCNYRate: usdToCNYRate
+            usdToCNYRate: await usdToCNYRate
         )
     }
 
@@ -164,9 +167,8 @@ struct GoldPriceService {
     private func makeKitcoRequest() -> URLRequest {
         var components = URLComponents(url: Self.kitcoGoldPage, resolvingAgainstBaseURL: false)!
         var queryItems = components.queryItems ?? []
-        let cacheBuster = Int(Date().timeIntervalSince1970 / Self.kitcoCacheWindow)
         queryItems.removeAll { $0.name == "_" }
-        queryItems.append(URLQueryItem(name: "_", value: String(cacheBuster)))
+        queryItems.append(URLQueryItem(name: "_", value: UUID().uuidString))
         components.queryItems = queryItems
 
         var request = URLRequest(url: components.url ?? Self.kitcoGoldPage)
@@ -187,6 +189,10 @@ struct GoldPriceService {
         }
 
         return rate
+    }
+
+    private func fetchUSDtoCNYRateSafely() async -> Double? {
+        try? await fetchUSDtoCNYRateFromKitco()
     }
 
     private func extractUSDtoCNYRate(from payload: KitcoPagePayload) -> Double? {

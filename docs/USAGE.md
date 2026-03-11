@@ -75,6 +75,7 @@ The detail window provides:
 - current source and last update time
 
 The main app refreshes once per second, so the detail window is more real-time than the widget.
+The line chart only advances when the upstream source returns a fresh quote; repeated polls with unchanged data do not move the trace.
 
 ## 6. Add the Desktop Widget
 

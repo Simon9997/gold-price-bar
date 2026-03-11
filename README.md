@@ -73,6 +73,7 @@ The app currently supports the following modes:
 - Widget: refresh frequency is controlled by `WidgetKit`
 
 That means true second-level updates only apply to the main app, not to the widget.
+The short-range line chart only advances when the quote source delivers a fresh sample.
 
 ## Project Structure
 

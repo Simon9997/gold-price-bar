@@ -4,6 +4,8 @@ import Foundation
 final class GoldPriceViewModel: ObservableObject {
     static let maxHistoryPoints = 1_800
     private static let sourcePreferenceKey = "gold_price_source_preference"
+    private static let compactHistoryWindow: TimeInterval = 90
+    private static let chartHistoryWindow: TimeInterval = 4 * 60
     private static let minimumHistoryStep: TimeInterval = 0.001
 
     @Published private(set) var quote: GoldQuote?
@@ -48,16 +50,19 @@ final class GoldPriceViewModel: ObservableObject {
                 return
             }
 
-            await refresh()
-
+            let clock = ContinuousClock()
             while !Task.isCancelled {
+                let cycleStartedAt = clock.now
+                await refresh()
+
                 do {
-                    try await Task.sleep(for: refreshInterval)
+                    try await clock.sleep(
+                        until: cycleStartedAt.advanced(by: refreshInterval),
+                        tolerance: .milliseconds(100)
+                    )
                 } catch {
                     return
                 }
-
-                await refresh()
             }
         }
     }
@@ -168,12 +173,12 @@ final class GoldPriceViewModel: ObservableObject {
         return GoldPriceFormatting.rmb(value)
     }
 
-    var latestUpdatedText: String {
-        guard let quote else {
-            return "--"
+    var latestUpdatedText: String? {
+        guard let fetchedAt = quote?.fetchedAt else {
+            return nil
         }
 
-        return GoldPriceFormatting.shortTime(quote.fetchedAt)
+        return GoldPriceFormatting.shortTime(fetchedAt)
     }
 
     var menuBarTitle: String {
@@ -185,11 +190,11 @@ final class GoldPriceViewModel: ObservableObject {
     }
 
     var compactHistory: [GoldPricePoint] {
-        Array(history.suffix(90))
+        historyPoints(within: Self.compactHistoryWindow)
     }
 
     var chartHistory: [GoldPricePoint] {
-        Array(history.suffix(240))
+        historyPoints(within: Self.chartHistoryWindow)
     }
 
     var sourceName: String {
@@ -208,7 +213,12 @@ final class GoldPriceViewModel: ObservableObject {
     }
 
     private func apply(_ quote: GoldQuote) {
+        let previousQuote = self.quote
         self.quote = quote
+
+        guard shouldAppendHistoryPoint(for: quote, previousQuote: previousQuote) else {
+            return
+        }
 
         // Chart x-values must stay strictly increasing. Upstream timestamps can
         // repeat or move backward, which makes the line fold onto itself.
@@ -221,6 +231,28 @@ final class GoldPriceViewModel: ObservableObject {
         if history.count > Self.maxHistoryPoints {
             history.removeFirst(history.count - Self.maxHistoryPoints)
         }
+    }
+
+    private func shouldAppendHistoryPoint(for quote: GoldQuote, previousQuote: GoldQuote?) -> Bool {
+        guard let previousQuote else {
+            return true
+        }
+
+        return previousQuote.sourceUpdatedAt != quote.sourceUpdatedAt
+            || previousQuote.pricePerOunce != quote.pricePerOunce
+            || previousQuote.bidPerOunce != quote.bidPerOunce
+            || previousQuote.askPerOunce != quote.askPerOunce
+            || previousQuote.sourceName != quote.sourceName
+    }
+
+    private func historyPoints(within window: TimeInterval) -> [GoldPricePoint] {
+        guard let latestTimestamp = history.last?.timestamp else {
+            return []
+        }
+
+        // Keep the chart frozen until a fresh upstream sample is appended.
+        let cutoff = latestTimestamp.addingTimeInterval(-window)
+        return history.filter { $0.timestamp >= cutoff }
     }
 
     private func nextHistoryTimestamp() -> Date {
